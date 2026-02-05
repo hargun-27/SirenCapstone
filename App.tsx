@@ -14,17 +14,6 @@ import { Colors } from './src/theme/colors';
 import { SirenProvider } from './src/state/SirenContext';
 
 function App() {
-  const missing: string[] = [];
-  if (!GestureHandlerRootView) missing.push('GestureHandlerRootView');
-  if (!SafeAreaProvider) missing.push('SafeAreaProvider');
-  if (!SirenProvider) missing.push('SirenProvider');
-  if (!RootNavigator) missing.push('RootNavigator');
-  if (missing.length) {
-    throw new Error(
-      `Siren startup error: missing component export(s): ${missing.join(', ')}`,
-    );
-  }
-
   return (
     <GestureHandlerRootView style={styles.container}>
       <SafeAreaProvider>

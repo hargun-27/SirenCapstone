@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -7,6 +7,7 @@ import { Spacing } from '../../theme/spacing';
 import { Card } from '../../components/Card';
 import { PrimaryButton, SecondaryButton } from '../../components/Buttons';
 import { useSiren } from '../../state/SirenContext';
+import { playAlarmSound, stopAlarmSound } from '../../sounds/alarmSounds';
 import type { RootStackParamList } from '../../navigation/RootNavigator';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'MotionAlert'>;
@@ -20,12 +21,59 @@ function formatTime(d: Date) {
 }
 
 export function MotionAlertScreen({ navigation }: Props) {
-  const { motionDetectedAt, clearMotion, disarm } = useSiren();
+  const {
+    motionDetectedAt,
+    alarmSound,
+    volume,
+    motionAlertsEnabled,
+    clearMotion,
+    disarmAndClearMotion,
+  } = useSiren();
+  const [isDisarming, setIsDisarming] = useState(false);
+  const [isDismissing, setIsDismissing] = useState(false);
+
+  // Play alarm when motion alert is shown (if alerts enabled)
+  useEffect(() => {
+    if (motionDetectedAt && motionAlertsEnabled) {
+      playAlarmSound(alarmSound, volume);
+    }
+    return () => {
+      stopAlarmSound();
+    };
+  }, [motionDetectedAt, motionAlertsEnabled, alarmSound, volume]);
 
   const timestamp = useMemo(() => {
     if (!motionDetectedAt) return '';
     return formatTime(motionDetectedAt);
   }, [motionDetectedAt]);
+
+  const handleDisarm = async () => {
+    if (isDisarming || isDismissing) return;
+    try {
+      setIsDisarming(true);
+      await stopAlarmSound();
+      await disarmAndClearMotion();
+      navigation.goBack();
+    } catch {
+      // Error is handled in context
+    } finally {
+      setIsDisarming(false);
+    }
+  };
+
+  const handleDismiss = async () => {
+    if (isDisarming || isDismissing) return;
+    try {
+      setIsDismissing(true);
+      await stopAlarmSound();
+      await clearMotion();
+      navigation.goBack();
+    } catch {
+      // Error is handled in context
+    } finally {
+      setIsDismissing(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -54,29 +102,28 @@ export function MotionAlertScreen({ navigation }: Props) {
           <View style={{ height: Spacing.lg }} />
 
           <PrimaryButton
-            label="Disarm Device"
-            onPress={() => {
-              disarm();
-              clearMotion();
-              navigation.goBack();
-            }}
+            label={isDisarming ? 'Disarming...' : 'Disarm Device'}
+            onPress={handleDisarm}
+            disabled={isDisarming || isDismissing}
+            loading={isDisarming}
             icon={
-              <Ionicons
-                name="lock-open-outline"
-                size={18}
-                color={Colors.background}
-              />
+              !isDisarming ? (
+                <Ionicons
+                  name="lock-open-outline"
+                  size={18}
+                  color={Colors.background}
+                />
+              ) : undefined
             }
           />
 
           <View style={{ height: Spacing.md }} />
 
           <SecondaryButton
-            label="Dismiss"
-            onPress={() => {
-              clearMotion();
-              navigation.goBack();
-            }}
+            label={isDismissing ? 'Dismissing...' : 'Dismiss'}
+            onPress={handleDismiss}
+            disabled={isDisarming || isDismissing}
+            loading={isDismissing}
           />
         </Card>
       </View>

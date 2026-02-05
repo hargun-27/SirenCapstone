@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
+  Alert,
   Modal,
   Pressable,
   ScrollView,
@@ -16,13 +17,13 @@ import { SirenHeader } from '../../components/SirenHeader';
 import { Card } from '../../components/Card';
 import { PrimaryButton, SecondaryButton } from '../../components/Buttons';
 import { useSiren, type AlarmSoundOption } from '../../state/SirenContext';
+import {
+  isAlarmSoundAvailable,
+  playAlarmSound,
+  stopAlarmSound,
+} from '../../sounds/alarmSounds';
 
-const SOUND_OPTIONS: AlarmSoundOption[] = [
-  'Default Alarm',
-  'Siren',
-  'Beep Pattern',
-  'Alert Tone',
-];
+const SOUND_OPTIONS: AlarmSoundOption[] = ['Alarm', 'Siren'];
 
 export function SettingsScreen() {
   const {
@@ -105,7 +106,15 @@ export function SettingsScreen() {
           <SecondaryButton
             label="Test Alarm"
             onPress={() => {
-              // TODO: play selected alarm sound
+              if (!isAlarmSoundAvailable()) {
+                Alert.alert(
+                  'Alarm sound unavailable',
+                  'Run "cd ios && pod install" then rebuild the app (e.g. npm run ios) to enable alarm sounds.',
+                );
+                return;
+              }
+              playAlarmSound(alarmSound, volume);
+              setTimeout(() => stopAlarmSound(), 3000);
             }}
             icon={
               <Ionicons
