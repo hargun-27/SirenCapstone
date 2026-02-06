@@ -102,28 +102,17 @@ export function MotionAlertScreen({ navigation }: Props) {
           <View style={{ height: Spacing.lg }} />
 
           <PrimaryButton
-            label={isDisarming ? 'Disarming...' : 'Disarm Device'}
-            onPress={handleDisarm}
-            disabled={isDisarming || isDismissing}
-            loading={isDisarming}
-            icon={
-              !isDisarming ? (
-                <Ionicons
-                  name="lock-open-outline"
-                  size={18}
-                  color={Colors.background}
-                />
-              ) : undefined
-            }
-          />
-
-          <View style={{ height: Spacing.md }} />
-
-          <SecondaryButton
             label={isDismissing ? 'Dismissing...' : 'Dismiss'}
             onPress={handleDismiss}
             disabled={isDisarming || isDismissing}
             loading={isDismissing}
+          />
+          <View style={{ height: Spacing.md }} />
+          <SecondaryButton
+            label={isDisarming ? 'Disarming...' : 'Disarm Device'}
+            onPress={handleDisarm}
+            disabled={isDisarming || isDismissing}
+            loading={isDisarming}
           />
         </Card>
       </View>
