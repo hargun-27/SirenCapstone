@@ -10,10 +10,11 @@
 		0C80B921A6F3F58F76C31292 /* libPods-SirenCapstone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-SirenCapstone.a */; };
 		114DD5E79D4B98D827830C4D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		7358FFAE3C03290F5049B242 /* police_siren.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EADFE2939ED9460EB55F70F5 /* police_siren.mp3 */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		E7A1B0012CA45674006654EE /* iphone_alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E7A1B0022CA45674006654EE /* iphone_alarm.mp3 */; };
-		E7A1B0032CA45674006654EE /* police_siren.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E7A1B0042CA45674006654EE /* police_siren.mp3 */; };
+		F06430C74F2CAFD968C74711 /* AlarmSoundModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9247A2ADAB8D40C60D261A5C /* AlarmSoundModule.m */; };
+		FB3587C755C9359ABEA72236 /* iphone_alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FCA44DBD9E79D347BCE36739 /* iphone_alarm.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,9 +27,12 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-SirenCapstone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SirenCapstone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = SirenCapstone/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SirenCapstone/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9247A2ADAB8D40C60D261A5C /* AlarmSoundModule.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AlarmSoundModule.m; path = SirenCapstone/AlarmSoundModule.m; sourceTree = "<group>"; };
 		E7A1B0022CA45674006654EE /* iphone_alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = file; name = iphone_alarm.mp3; path = SirenCapstone/Sounds/iphone_alarm.mp3; sourceTree = "<group>"; };
 		E7A1B0042CA45674006654EE /* police_siren.mp3 */ = {isa = PBXFileReference; lastKnownFileType = file; name = police_siren.mp3; path = SirenCapstone/Sounds/police_siren.mp3; sourceTree = "<group>"; };
+		EADFE2939ED9460EB55F70F5 /* police_siren.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; name = police_siren.mp3; path = SirenCapstone/Sounds/police_siren.mp3; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FCA44DBD9E79D347BCE36739 /* iphone_alarm.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; name = iphone_alarm.mp3; path = SirenCapstone/Sounds/iphone_alarm.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +57,19 @@
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 				E7A1B0022CA45674006654EE /* iphone_alarm.mp3 */,
 				E7A1B0042CA45674006654EE /* police_siren.mp3 */,
+				9247A2ADAB8D40C60D261A5C /* AlarmSoundModule.m */,
+				FCA44DBD9E79D347BCE36739 /* iphone_alarm.mp3 */,
+				EADFE2939ED9460EB55F70F5 /* police_siren.mp3 */,
 			);
 			name = SirenCapstone;
+			sourceTree = "<group>";
+		};
+		2A03E53B3A20B5013A3F889A /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				79D632C783A2AB799A871895 /* SirenCapstone */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -64,6 +79,13 @@
 				5DCACB8F33CDC322A6C60F78 /* libPods-SirenCapstone.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		79D632C783A2AB799A871895 /* SirenCapstone */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SirenCapstone;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -81,6 +103,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				2A03E53B3A20B5013A3F889A /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -167,8 +190,8 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				114DD5E79D4B98D827830C4D /* PrivacyInfo.xcprivacy in Resources */,
-				E7A1B0012CA45674006654EE /* iphone_alarm.mp3 in Resources */,
-				E7A1B0032CA45674006654EE /* police_siren.mp3 in Resources */,
+				FB3587C755C9359ABEA72236 /* iphone_alarm.mp3 in Resources */,
+				7358FFAE3C03290F5049B242 /* police_siren.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
+				F06430C74F2CAFD968C74711 /* AlarmSoundModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +305,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SirenCapstone;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -309,7 +333,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SirenCapstone;
 				SWIFT_VERSION = 5.0;

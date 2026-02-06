@@ -1,26 +1,37 @@
-/**
- * Alarm sound stub — no native audio library is currently installed.
- * All functions are no-ops so the rest of the app works without crashing.
- * Replace this with a real implementation once an RN 0.83-compatible
- * audio library is available.
- */
+import { NativeModules } from 'react-native';
+
+const { AlarmSoundModule } = NativeModules;
 
 export type AlarmSoundOption = 'Alarm' | 'Siren';
 
-/** Always returns false — no audio library installed. */
+/**
+ * Map each option to the filename (without extension) inside ios/Sounds/.
+ */
+const SOUND_FILES: Record<AlarmSoundOption, string> = {
+  Alarm: 'iphone_alarm',
+  Siren: 'police_siren',
+};
+
+/** Always returns true – the sounds are bundled with the app. */
 export function isAlarmSoundAvailable(): boolean {
-  return false;
+  return true;
 }
 
-/** No-op — no audio library installed. */
+/**
+ * Play the selected alarm sound at the given volume (0-100).
+ * Loops until stopAlarmSound() is called.
+ */
 export function playAlarmSound(
-  _option: AlarmSoundOption,
-  _volumePercent: number,
+  option: AlarmSoundOption,
+  volumePercent: number,
 ): void {
-  console.warn('[alarmSounds] No audio library installed — sound not played.');
+  const filename = SOUND_FILES[option];
+  AlarmSoundModule.play(filename, volumePercent);
 }
 
-/** No-op — resolves immediately. */
-export function stopAlarmSound(): Promise<void> {
-  return Promise.resolve();
+/**
+ * Stop the currently playing alarm sound.
+ */
+export function stopAlarmSound(): void {
+  AlarmSoundModule.stop();
 }
